@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Travel-Inder</string>
+    <string name="DEBUG_TAG">debug</string>
+</resources>
