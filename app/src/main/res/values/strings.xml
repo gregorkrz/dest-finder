@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">Travel-Inder</string>
+    <string name="app_name">Destination-Finder</string>
     <string name="DEBUG_TAG">debug</string>
+    <integer name="max_daily_offers">5</integer>
+    <integer name="max_cache">40</integer>
+    <string name="welcome_message">This app will show you 5 random trips to different destinations. Destination-Finder works like Tinder (ha) - swipe left to discard the current one, and swipe right to book the trip. Once you swipe left, the destination won\'t be shown again.</string>
+    <string name="no_more_offers">No more offers for today. Come back tomorrow for more :)</string>
+    <string name="error_message">An error occurred. Check your internet connection; try again with different airport code.</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="si.gregor.travel_inder.HelloActivity">
+    tools:context="si.gregor.destfinder.HelloActivity">
 
     <TextView
         android:id="@+id/helloText"

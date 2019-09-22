@@ -1,4 +1,4 @@
-package si.gregor.travel_inder
+package si.gregor.destfinder
 
 import org.junit.Test
 

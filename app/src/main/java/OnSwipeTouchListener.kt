@@ -1,4 +1,4 @@
-package si.gregor.travel_inder
+package si.gregor.destfinder
 
 import android.content.Context
 import android.view.GestureDetector.SimpleOnGestureListener

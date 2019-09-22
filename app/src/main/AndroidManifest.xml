@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="si.gregor.travel_inder">
+    package="si.gregor.destfinder">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".WebViewActivity" />
-        <activity android:name=".HelloActivity">
+        <activity android:name="si.gregor.destfinder.MainActivity"/>
+        <activity android:name="si.gregor.destfinder.WebViewActivity" />
+        <activity android:name="si.gregor.destfinder.HelloActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

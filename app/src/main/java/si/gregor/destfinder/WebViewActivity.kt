@@ -1,4 +1,4 @@
-package si.gregor.travel_inder
+package si.gregor.destfinder
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
-import android.view.Window
 
 
 class WebViewActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package si.gregor.travel_inder
+package si.gregor.destfinder
 
 import android.content.Context
 import android.content.Intent
@@ -18,15 +18,20 @@ class HelloActivity : AppCompatActivity() {
         val mPrefs = getSharedPreferences("save", Context.MODE_PRIVATE)
         vars = VariableSaving(mPrefs)
 
-        if (vars!!.isFirstTime()) {
+        if (vars!!.isFirstTime() || intent.hasExtra("error")) {
             vars!!.setFirstTime()
-            text.text = "This app will show you 5 random trips to different destinations. It works like Tinder - swipe left to discard the current one, and swipe right to book the trip. Once you swipe left, the destination won't be shown again."
+            if (intent.hasExtra("error")) {
+                text.text = resources.getString(R.string.error_message)
+            } else {
+                text.text = resources.getString(R.string.welcome_message)
+            }
+
             // TODO airport iata code
             val btn = findViewById<Button>(R.id.getstarted)
             btn.visibility= View.VISIBLE
         } else if(vars!!.noMoreOffers()) {
-            text.text = "No more offers for today. Come back tomorrow for more :)"
-        } else {
+            text.text = resources.getString(R.string.no_more_offers)
+        }  else {
             intent = Intent(this@HelloActivity, MainActivity::class.java)
             startActivity(intent)
             finish()

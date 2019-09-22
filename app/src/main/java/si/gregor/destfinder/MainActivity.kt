@@ -1,27 +1,17 @@
-package si.gregor.travel_inder
-// TODO implement
-import android.app.Activity
+package si.gregor.destfinder
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.support.constraint.ConstraintLayout
-import android.transition.Visibility
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Callback
-import android.support.v4.content.ContextCompat.startActivity
 import android.content.Intent
-import android.net.Uri
-import co.metalab.asyncawait.async
 import com.airbnb.lottie.LottieAnimationView
-import android.opengl.ETC1.getHeight
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -62,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
             val view = findViewById<ImageView>(R.id.imageView)
             view.post(Runnable {
+                // run when layout is laid out on the screen
                 nextDestination()
             })
 
@@ -100,11 +91,18 @@ class MainActivity : AppCompatActivity() {
                 cityName.text = currentFlight.cityTo
                 additionalInfo.text = "Flight time ${currentFlight.fly_duration} | ${currentFlight.nightsInDest} Nights"
                 price.text = "${currentFlight.price} ${flights!!.currency}"
+                vars!!.alreadyUsed(currentFlight.mapIdto)
 
             }
 
             override fun onError(e: Exception) {
-                Toast.makeText(applicationContext, "An error occurred.", Toast.LENGTH_LONG).show()
+                lastIndex--
+                vars!!.setLastIndex(lastIndex)
+                Log.e("Error", "$e")
+                val intent = Intent(this@MainActivity, HelloActivity::class.java)
+                intent.putExtra("error", true)
+                startActivity(intent)
+                finish()
             }
         }
 

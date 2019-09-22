@@ -1,11 +1,7 @@
-package si.gregor.travel_inder
+package si.gregor.destfinder
 
-import android.content.Context
 import android.content.SharedPreferences
 import com.soywiz.klock.DateTimeTz
-import com.soywiz.klock.days
-import android.R.id.edit
-import android.util.Log
 import com.google.gson.Gson
 
 
@@ -13,7 +9,8 @@ import com.google.gson.Gson
 
 
 class VariableSaving (_mPrefs: SharedPreferences){
-    val mPrefs = _mPrefs
+    private val mPrefs = _mPrefs
+
     fun isFirstTime(): Boolean {
         return !mPrefs.contains("already_opened")
     }
@@ -62,5 +59,22 @@ class VariableSaving (_mPrefs: SharedPreferences){
         val prefsEditor = mPrefs.edit()
         prefsEditor.putBoolean("already_opened", true)
         prefsEditor.commit()
+    }
+
+    fun alreadyUsed(city: String) {
+        val prefsEditor = mPrefs.edit()
+        val cities = mPrefs.getString("already_used_cities","")
+        prefsEditor.putString("already_used_cities", cities.plus(",").plus(city))
+        prefsEditor.commit()
+    }
+
+    fun canDisplay(city: String): Boolean {
+        val count = mPrefs.getString("already_used_cities","").count{ ",".contains(it) }
+        if (count > 40) {
+            val prefsEditor = mPrefs.edit()
+            prefsEditor.putString("already_opened", "")
+            prefsEditor.commit()
+        }
+        return ! mPrefs.getString("already_used_cities","").contains(city, ignoreCase = true)
     }
 }
