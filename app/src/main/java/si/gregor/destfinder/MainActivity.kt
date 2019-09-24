@@ -12,6 +12,8 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Callback
 import android.content.Intent
 import com.airbnb.lottie.LottieAnimationView
+import com.soywiz.klock.DateTime
+import com.soywiz.klock.DateTimeTz
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,10 +32,10 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title="Daily offers"
         val mainLayout : ConstraintLayout = findViewById(R.id.mainLayout)
 
-        mainLayout.setOnTouchListener(OnSwipeTouchListener(this@MainActivity, SwipingFuncs()));
+        mainLayout.setOnTouchListener(OnSwipeTouchListener(this@MainActivity, SwipingFuncs()))
 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         vars = VariableSaving(getSharedPreferences("save", Context.MODE_PRIVATE))
 
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("LASTINDEX","$lastIndex")
         if (lastIndex == -2) {
             // fetch new 5 trips
-            val kiwi = KiwiApi(this@MainActivity)
+            val kiwi = KiwiApi(this@MainActivity, vars)
             kiwi.fetchFlights()
             lastIndex = -1
         } else {
@@ -89,7 +91,8 @@ class MainActivity : AppCompatActivity() {
                 val additionalInfo = findViewById<TextView>(R.id.additionalInfo)
                 val price = findViewById<TextView>(R.id.price)
                 cityName.text = currentFlight.cityTo
-                additionalInfo.text = "Flight time ${currentFlight.fly_duration} | ${currentFlight.nightsInDest} Nights"
+                val depDate = DateTime.fromUnix(currentFlight.dTime*1000).format("dd.MM.YYYY")
+                additionalInfo.text = "Flight time ${currentFlight.fly_duration} | Dep $depDate | ${currentFlight.nightsInDest} Nights"
                 price.text = "${currentFlight.price} ${flights!!.currency}"
                 vars!!.alreadyUsed(currentFlight.mapIdto)
 

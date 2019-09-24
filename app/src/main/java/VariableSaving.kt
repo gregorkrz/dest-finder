@@ -61,6 +61,19 @@ class VariableSaving (_mPrefs: SharedPreferences){
         prefsEditor.commit()
     }
 
+    fun setAirport(airport: String) {
+        val prefsEditor = mPrefs.edit()
+        prefsEditor.putString("airport", airport)
+        prefsEditor.commit()
+    }
+
+    fun getAirport() : String {
+        var airport = mPrefs.getString("airport", "this-is-empty")
+        if(airport == "") airport ="this-is-empty"
+        airport = airport.toUpperCase()
+        return airport
+    }
+
     fun alreadyUsed(city: String) {
         val prefsEditor = mPrefs.edit()
         val cities = mPrefs.getString("already_used_cities","")
